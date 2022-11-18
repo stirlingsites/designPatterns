@@ -6,7 +6,8 @@ from random import sample
 class GameFactory:
     def __init__(self, type_of_game):
         self.type_of_game = type_of_game
-    def Game_category(self):
+
+    def game_category(self):
         if self.type_of_game == "quit":
             sys.exit()
         elif self.type_of_game == "trivia":
@@ -59,8 +60,10 @@ class GameInterface:
     def check_guess(self):
         score = 0
         for key in self.questions:
-            answer = input(f"Question: {key}\nPlease enter you answer: ").lower().strip()
-            if answer == self.questions[key]:
+            answer = input(f"Question: {key}\nPlease enter you answer: (enter 'quit' to quit)").lower().strip()
+            if answer == "quit":
+                sys.exit()
+            elif answer == self.questions[key]:
                 print("Correct!")
                 score += 1
             else:

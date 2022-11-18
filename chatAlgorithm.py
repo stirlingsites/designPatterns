@@ -64,7 +64,7 @@ def user_input_output():
                 "Enter the type of game you want to play: 'Trivia' or 'Guessing' or 'Fill in the Blank', enter 'quit' "
                 "to quit:").lower().strip()
             # send users choice to game factory
-            gametype = games.gameFactory(game_choice)
+            gametype = games.GameFactory(game_choice)
             # calls game_category function on object to determine type of game user wants to play
             result = gametype.game_category()
             # calls game_category function on object to determine category of chosen game  user wants to play
