@@ -7,6 +7,7 @@ class GameFactory:
     def __init__(self, type_of_game):
         self.type_of_game = type_of_game
 
+    # return the class for the correct game type
     def game_category(self):
         if self.type_of_game == "quit":
             sys.exit()
@@ -22,6 +23,7 @@ class GameFactory:
         raise AssertionError("Game type is not valid.")
 
 
+# returns the class for the user picked trivia type
 class TriviaFactory(GameFactory):
     def game_category(self):
         print(self.type_of_game)
@@ -33,6 +35,8 @@ class TriviaFactory(GameFactory):
             return movie_trivia()
         raise AssertionError("Trivia type is not valid.")
 
+
+# returns the class for the user picked guessing type
 class GuessFactory(GameFactory):
     def game_category(self):
         if self.type_of_game == "card":
@@ -43,6 +47,8 @@ class GuessFactory(GameFactory):
             return what_am_i_riddles_guess()
         raise AssertionError("Guessing game type is not valid.")
 
+
+# returns the class for the user picked fill in the blank type
 class FibFactory(GameFactory):
     def game_category(self):
         if self.type_of_game == "math":
@@ -54,6 +60,7 @@ class FibFactory(GameFactory):
         raise AssertionError("Fill in the blank type is not valid.")
 
 
+# interface for games
 class GameInterface:
     questions = {}
 
@@ -75,6 +82,8 @@ class GameInterface:
         correct_answers = self.check_guess()
         print(f"You answered {correct_answers} out of 8 correctly! Good job!")
 
+
+# class to run the math fill in the blank game that inherits from the GameInterface
 class math_fib(GameInterface):
     questions = {
         "111 + 222 + 333 = ?": "666",
@@ -88,6 +97,7 @@ class math_fib(GameInterface):
     }
 
 
+# class to run the tv fill in the blank game that inherits from the GameInterface
 class tv_fib(GameInterface):
     questions = {
         "The ______ diaries": "vampire",
@@ -101,6 +111,7 @@ class tv_fib(GameInterface):
     }
 
 
+# class to run the music fill in the blank game that inherits from the GameInterface
 class music_fib(GameInterface):
     questions = {
         "You ______ with me": "belong",
@@ -114,6 +125,7 @@ class music_fib(GameInterface):
     }
 
 
+# class to run the movie trivia game that inherits from the GameInterface
 class movie_trivia(GameInterface):
     questions = {
         "For what movie did Tom Hanks score his first Academy Award nomination?": "big",
@@ -127,6 +139,7 @@ class movie_trivia(GameInterface):
     }
 
 
+# class to run the sports trivia game that inherits from the GameInterface
 class sports_trivia(GameInterface):
     questions = {
         "The olympics are held every how many years?": "4",
@@ -140,6 +153,7 @@ class sports_trivia(GameInterface):
     }
 
 
+# class to run the celebrities trivia game that inherits from the GameInterface
 class celebrities_trivia(GameInterface):
     questions = {
         "Ariana Grande got her start on what kids TV show?": "victorious",
@@ -153,6 +167,7 @@ class celebrities_trivia(GameInterface):
     }
 
 
+# class to run the what am I guessing game that inherits from the GameInterface
 class what_am_i_riddles_guess(GameInterface):
     questions = {
         "I have a head and a tail that will never meet. Having too many of me is always a treat. What am I?": "coin",
@@ -166,19 +181,21 @@ class what_am_i_riddles_guess(GameInterface):
     }
 
 
+# class to run the number guessing game
 class number_guess(GameInterface):
+    # prompts user to guess a number
     def guess_number(self):
         guess = int(input("What number (1-10) do you think I picked?"))
         return guess
 
-
+    # checks the number guessed by the user
     def check_number(self, guess, number):
         if guess > number:
             print("Your guess was too high")
         else:
             print("Your guess was too low")
 
-
+    # gets number and runs the game
     def run_game(self):
         number = random.randint(1, 10)
         guess = self.guess_number()
@@ -188,7 +205,7 @@ class number_guess(GameInterface):
         print(f"You picked {number} which is the correct number!")
 
 
-
+# class to run the card guessing game
 class card_guess(GameInterface):
     # set of possible suits
     suits = {"hearts", "spades", "clubs", "diamonds"}
